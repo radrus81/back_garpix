@@ -21,6 +21,6 @@ Route::get('/actionSortProducts', [ProductsController::class, 'actionSortProduct
 
 Auth::routes();
 
-Route::get('/home', [BasketController::class, 'index'])->name('home');
+Route::get('/basket', [BasketController::class, 'index'])->name('basket');
 Route::post('/actionAddProduct', [BasketController::class, 'actionAddProduct']);
 Route::delete('/actionDeleteProduct', [BasketController::class, 'actionDeleteProduct']);

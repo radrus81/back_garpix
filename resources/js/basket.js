@@ -21,7 +21,7 @@ window.removeProductToBasket = id => {
         },
         error: function (error) {   
             if(error.status === 401){
-                window.location.href =(`http://${getUrl()}home`);
+                window.location.href =(`http://${getUrl()}login`);
             }
             console.log('Произошла ошибка', error.responseJSON);
         }

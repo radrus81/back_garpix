@@ -17,5 +17,5 @@ window.getUrl = function getUrl() {
         }
     }
     url = url.replace('index.php', '');
-    return url.replace('home', '');
+    return url.replace('basket', '');
 }

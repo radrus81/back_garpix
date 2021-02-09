@@ -4,7 +4,7 @@
     <td class="col-3">{{$product->name}}</td>
     <td class="col-2">{{$product->amount}}</td> 
     <td class="col-1">
-        @if(Route::currentRouteName() === 'home' || isset($deleteProduct))   
+        @if(Route::currentRouteName() === 'basket' || isset($deleteProduct))   
         <i class="fas fa-trash fa-lg text-danger" 
            title="Удалить из корзины" 
            onclick="removeProductToBasket({{$product->id}})"></i>
@@ -24,7 +24,7 @@
     </td>            
 </tr>   
 @endforelse
-@if (Route::currentRouteName() === 'home' || isset($deleteProduct))
+@if (Route::currentRouteName() === 'basket' || isset($deleteProduct))
 <tr class="d-flex">
     <td class="col-1" ></td>
     <td class="col-3" colspan="2">Всего:</td>

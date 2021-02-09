@@ -37,24 +37,24 @@ window.addProductToBasket = id => {
         contentType: false,
         response: 'json',
         beforeSend: function () {
-            $(`.spinneradd_${id}`).show();
+            $(`.spinneradd_${id}`).show();            
         },
         complete: function () {
             $(`.spinneradd_${id}`).hide();
         },
         success: function (res) {
+            $('.alertMess').removeClass('alert-success alert-danger');
             $('.alertMess').addClass(res['style']);
             $('.alertMess').text(res['message']);
             $('.alertMess').show();
-            setTimeout(() => {
-                $('.alertMess').removeClass('alert-success','alert-danger');
+            setTimeout(() => {                
                 $('.alertMess').hide();
             }, 3000);
 
         },
         error: function (error) {
             if(error.status === 401){
-                window.location.href =(`http://${getUrl()}home`);
+                window.location.href =(`http://${getUrl()}login`);
             }
             console.log('Произошла ошибка', error.status);
         }

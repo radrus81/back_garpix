@@ -17,7 +17,7 @@ class BasketController extends Controller {
         $dataBasket = $this->getProductsForUser();
         $products = $dataBasket['products'];
         $totalAmount = $dataBasket['totalAmount'];
-        return view('home', compact('products', 'totalAmount'));
+        return view('basket', compact('products', 'totalAmount'));
     }
 
     public function actionAddProduct(Request $request) {
