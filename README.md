@@ -1,11 +1,29 @@
 ## Установка
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. склонировать репозиторий git clone https://github.com/radrus81/back_garpix.git
 
-## Security Vulnerabilities
+2. Перейти в папку с исходниками back_garpix
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. Выполнить команду composer update
 
-## License
+4. Создать файл .env из .env.example
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. Сгенерировать ключ командой php artisan key:generate
+
+6. Создать базу данный для проекта и прописать данные в .env
+
+7. Мигрировать базу данных командой php artisan migrate
+
+8. Заполнить таблицы данными командой php artisan db:seed
+
+9. Запустить сервер командой php artisan serve
+
+10. Открыть приложение в баузере на localhost:8000
+
+Для разработки установить пакеты командой
+
+npm install
+
+сборка командой npm run dev
+
+запуск в режиме слежки за кодом npm run watch
