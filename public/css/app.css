@@ -10004,3 +10004,19 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.card_block {
+  margin-top: 20px;
+  display: flex;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.fa-shopping-basket, .fa-trash {
+  cursor: pointer;
+}
+
+.nav-item a {
+  color: #fff;
+}

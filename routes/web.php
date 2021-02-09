@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\BasketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ProductsController::class, 'actionGetProducts']);
+
+Route::get('/actionSortProducts', [ProductsController::class, 'actionSortProducts']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [BasketController::class, 'index'])->name('home');
+Route::post('/actionAddProduct', [BasketController::class, 'actionAddProduct']);
+Route::delete('/actionDeleteProduct', [BasketController::class, 'actionDeleteProduct']);
