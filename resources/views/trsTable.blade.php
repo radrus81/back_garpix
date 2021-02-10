@@ -4,15 +4,21 @@
     <td class="col-3">{{$product->name}}</td>
     <td class="col-2">{{$product->amount}}</td> 
     <td class="col-1">
-        @if(Route::currentRouteName() === 'cart' || isset($deleteProduct))   
+        @if(Route::currentRouteName() === 'cart' || Route::currentRouteName() === 'cartsession' || isset($route))   
         <i class="fas fa-trash fa-lg text-danger" 
            title="Удалить из корзины" 
-           onclick="removeProductToCart({{$product->id}})"></i>
+           onclick="removeProductToCart({{$product->id}},'{{Route::currentRouteName() ? Route::currentRouteName(): $route}}');"></i>
         <span class="spinner-border spinner-border-sm spinnerdel_{{$product->id}}"  role="status" aria-hidden="false" style="display: none;"></span>
+        @else
+        @guest
+        <i class="fas fa-shopping-cart fa-lg text-success" 
+           title="Добавить в корзину" 
+           onclick="addProductToCart({{$product->id}},'actionAddProductToSession');"></i>
         @else
         <i class="fas fa-shopping-cart fa-lg text-success" 
            title="Добавить в корзину" 
-           onclick="addProductToCart({{$product->id}})"></i>
+           onclick="addProductToCart({{$product->id}},'actionAddProduct');"></i>
+        @endguest
         <span class="spinner-border spinner-border-sm spinneradd_{{$product->id}}"  role="status" aria-hidden="false" style="display: none;"></span>
         @endif
     </td> 
@@ -24,7 +30,7 @@
     </td>            
 </tr>   
 @endforelse
-@if (Route::currentRouteName() === 'cart' || isset($deleteProduct))
+@if (Route::currentRouteName() === 'cart' || Route::currentRouteName() === 'cartsession' || isset($route))
 <tr class="d-flex">
     <td class="col-1" ></td>
     <td class="col-3" colspan="2">Всего:</td>

@@ -3,54 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Cartitem;
-use DB;
-use Illuminate\Support\Facades\Auth;
+use App\Services\CartService;
 
 class CartController extends Controller {
-    
-    public function __construct() {
+
+    public function __construct(CartService $CartService) {
         $this->middleware('auth');
+        $this->cartService = $CartService;
     }
 
     public function index() {
-        list($products,$totalAmount) = $this->getProductsForUser();
+        $this->cartService->moveProductsFromSessionToBase();
+        list($products, $totalAmount) = $this->cartService->getProductsForUser();
         return view('cart', compact('products', 'totalAmount'));
     }
 
     public function actionAddProduct(Request $request) {
-        $isProductForUser = Cartitem::where(['id_user' => Auth::id(), 'id_product' => $request->id_product])->exists();
-        if ($isProductForUser) {
-            return response()->json(array('style' => 'alert-danger', 'message' => 'Товар уже есть в корзине!'));
-        } else {
-            $cartitem = new Cartitem;
-            $cartitem->id_product = $request->id_product;
-            $cartitem->id_user = Auth::id();
-            $cartitem->save();
-            return response()->json(array('style' => 'alert-success', 'message' => 'Товар успешно добавлен в корзину'));
-        }
+        list($style, $message) = $this->cartService->addProduct($request->id_product);
+        return response()->json(array('style' => $style, 'message' => $message));
     }
 
-    public function actionDeleteProduct(Request $request) {
-        $cartitem = Cartitem::find($request->id);
-        $cartitem->delete();
-        list($products,$totalAmount) = $this->getProductsForUser();
-        $deleteProduct = true;
-        $trsTableHtml = view('trsTable',compact('products','totalAmount','deleteProduct'))->render();
-        return response()->json(array('trsTableHtml' => $trsTableHtml));
+    public function actionDeleteProduct(Request $request) {        
+        return response()->json(array('trsTableHtml' => $this->cartService->deleteProduct($request->id)));
     }
-
-    private function getProductsForUser() {
-        $products = DB::table('cartitems')
-                ->select(DB::raw('cartitems.id,name,amount'))
-                ->leftJoin('products', 'products.id', '=', 'cartitems.id_product')
-                ->where('id_user',Auth::id())
-                ->get();
-        $totalAmount = DB::table('cartitems')
-                ->where('id_user', Auth::id())
-                ->leftJoin('products', 'products.id', '=', 'cartitems.id_product')
-                ->sum('amount');
-        return array($products,$totalAmount);
-    }
-
+    
 }

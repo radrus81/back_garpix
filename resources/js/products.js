@@ -26,12 +26,12 @@ window.sortProducts = (field) => {
 }
 
 
-window.addProductToCart = id => {
+window.addProductToCart = (id,action) => {
     let formData = new FormData();
     formData.append('id_product', id);
     $.ajax({
         type: 'POST',
-        url: `http://${getUrl()}actionAddProduct`,
+        url: `http://${getUrl()}${action}`,
         data: formData,
         processData: false,
         contentType: false,

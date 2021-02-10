@@ -15,7 +15,6 @@ window.getUrl = function getUrl() {
         } else {
             break;
         }
-    }
-    url = url.replace('index.php', '');
-    return url.replace('cart', '');
+    }    
+    return url.replace('index.php', '');
 }

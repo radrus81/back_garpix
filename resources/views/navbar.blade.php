@@ -21,6 +21,9 @@
                     <a class="nav-link" href="/">{{ __('Товары') }}</a>
                 </li>
                 @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('cartsession') }}">{{ __('Корзина') }}</a>
+                </li>
                 @if (Route::has('login'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>

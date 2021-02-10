@@ -1,10 +1,14 @@
-window.removeProductToCart = id => {
+window.removeProductToCart = (id,placeData) => {
+    let action = 'actionDeleteProduct';
+    if (placeData === 'cartsession'){
+        action = 'actionDeleteProductFromSession';
+    }
     let formData = new FormData();
     formData.append('id', id);
     formData.append('_method', 'delete');
     $.ajax({
         type: 'POST',
-        url: `http://${getUrl()}actionDeleteProduct`,
+        url: `http://${getUrl()}/${action}`,
         data: formData,
         processData: false,
         contentType: false,

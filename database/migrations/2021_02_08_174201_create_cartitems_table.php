@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCartTable extends Migration
+class CreateCartitemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,8 @@ class CreateCartTable extends Migration
     {
         Schema::create('cartitems', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_product')->nullable();
-            $table->integer('id_user')->nullable();
+            $table->integer('id_cart')->nullable();
+            $table->integer('id_product')->nullable();            
             $table->timestamps();
         });
     }

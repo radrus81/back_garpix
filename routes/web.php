@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +17,14 @@ use App\Http\Controllers\CartController;
 */
 
 Route::get('/', [ProductsController::class, 'actionGetProducts']);
-
 Route::get('/actionSortProducts', [ProductsController::class, 'actionSortProducts']);
+
+Route::get('/cartsession', [CartSessionController::class, 'index'])->name('cartsession');
+Route::post('/actionAddProductToSession', [CartSessionController::class, 'actionAddProduct']);
+Route::delete('cartsession/actionDeleteProductFromSession', [CartSessionController::class, 'actionDeleteProductFromSession']);
 
 Auth::routes();
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/actionAddProduct', [CartController::class, 'actionAddProduct']);
-Route::delete('/actionDeleteProduct', [CartController::class, 'actionDeleteProduct']);
+Route::delete('cart/actionDeleteProduct', [CartController::class, 'actionDeleteProduct']);
