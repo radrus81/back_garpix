@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\BasketController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +21,6 @@ Route::get('/actionSortProducts', [ProductsController::class, 'actionSortProduct
 
 Auth::routes();
 
-Route::get('/basket', [BasketController::class, 'index'])->name('basket');
-Route::post('/actionAddProduct', [BasketController::class, 'actionAddProduct']);
-Route::delete('/actionDeleteProduct', [BasketController::class, 'actionDeleteProduct']);
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/actionAddProduct', [CartController::class, 'actionAddProduct']);
+Route::delete('/actionDeleteProduct', [CartController::class, 'actionDeleteProduct']);

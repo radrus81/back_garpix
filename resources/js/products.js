@@ -26,7 +26,7 @@ window.sortProducts = (field) => {
 }
 
 
-window.addProductToBasket = id => {
+window.addProductToCart = id => {
     let formData = new FormData();
     formData.append('id_product', id);
     $.ajax({

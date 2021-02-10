@@ -1,4 +1,4 @@
-window.removeProductToBasket = id => {
+window.removeProductToCart = id => {
     let formData = new FormData();
     formData.append('id', id);
     formData.append('_method', 'delete');
