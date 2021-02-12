@@ -7,9 +7,9 @@ use App\Services\CartService;
 
 class CartController extends Controller {
 
-    public function __construct(CartService $CartService) {
+    public function __construct(CartService $cartService) {
         $this->middleware('auth');
-        $this->cartService = $CartService;
+        $this->cartService = $cartService;
     }
 
     public function index() {
@@ -23,8 +23,10 @@ class CartController extends Controller {
         return response()->json(array('style' => $style, 'message' => $message));
     }
 
-    public function actionDeleteProduct(Request $request) {        
-        return response()->json(array('trsTableHtml' => $this->cartService->deleteProduct($request->id)));
+    public function actionDeleteProduct(Request $request) { 
+        $route = 'cart';
+        list ($products,$totalAmount) = $this->cartService->deleteProduct($request->id);
+        return response()->json(array('trsTableHtml' => view('trsTable', compact('products', 'totalAmount', 'route'))->render()));
     }
     
 }

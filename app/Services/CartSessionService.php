@@ -6,11 +6,7 @@ use Session;
 use App\Models\Product;
 
 class CartSessionService {
-
-    public function __construct() {
-        
-    }
-
+   
     public function getProductToSession() {
         $totalAmount = 0;
         $products = array();
@@ -51,10 +47,8 @@ class CartSessionService {
                 array_splice($productsInCart, $key, 1);
             }
         }
-        Session::put('cart', $productsInCart);
-        list($products, $totalAmount) = $this->getProductToSession();
-        $route = 'cartsession';
-        return view('trsTable', compact('products', 'totalAmount', 'route'))->render();
+        Session::put('cart', $productsInCart);               
+        return $this->getProductToSession();
     }
 
 }

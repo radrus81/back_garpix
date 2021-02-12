@@ -15,8 +15,10 @@ class CreateCartitemsTable extends Migration
     {
         Schema::create('cartitems', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_cart')->nullable();
-            $table->integer('id_product')->nullable();            
+            $table->integer('id_cart')->unsigned();
+            $table->foreign('id_cart')->references('id')->on('cart');
+            $table->integer('id_product')->unsigned(); 
+            $table->foreign('id_product')->references('id')->on('products');
             $table->timestamps();
         });
     }

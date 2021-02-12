@@ -10,10 +10,7 @@ use App\Models\Cartitem;
 
 class CartService {
 
-    public function __construct() {
-        
-    }
-
+    
     public function moveProductsFromSessionToBase() {
         $cartUser = Cart::firstOrCreate(['id_user' => Auth::id()]);
         if (Session::has('cart')) {
@@ -47,10 +44,8 @@ class CartService {
 
     public function deleteProduct($id) {
         $cartitem = Cartitem::find($id);
-        $cartitem->delete();
-        list($products, $totalAmount) = $this->getProductsForUser();
-        $route = 'cart';
-        return view('trsTable', compact('products', 'totalAmount', 'route'))->render();
+        $cartitem->delete();                
+        return $this->getProductsForUser();
     }
 
     public function getProductsForUser() {
