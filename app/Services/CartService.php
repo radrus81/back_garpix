@@ -5,8 +5,10 @@ namespace App\Services;
 use DB;
 use Session;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Cart;
 use App\Models\Cartitem;
+use App\Models\Product;
 
 class CartService {
 
@@ -49,17 +51,16 @@ class CartService {
     }
 
     public function getProductsForUser() {
-        $cartUser = Cart::where('id_user', Auth::id())->first();
-        $products = DB::table('cartitems')
-                ->select(DB::raw('cartitems.id,name,amount'))
-                ->leftJoin('products', 'products.id', '=', 'cartitems.id_product')
-                ->where('id_cart', $cartUser->id)
-                ->get();
-        $totalAmount = DB::table('cartitems')
-                ->where('id_cart', $cartUser->id)
-                ->leftJoin('products', 'products.id', '=', 'cartitems.id_product')
-                ->sum('amount');
-        return array($products, $totalAmount);
+        $totalAmount = 0;
+        $dataProducts = [];
+        $user = User::find(Auth::id());                             
+        $products = $user->cart->cartitems;        
+        foreach ($products as $product){
+            $modelProduct = Product::find($product->id_product);
+            array_push($dataProducts,(object)['id'=>$product->id,'name'=>$modelProduct->name,'amount'=>$modelProduct->amount]);
+            $totalAmount += $modelProduct->amount;
+        }
+        return array($dataProducts, $totalAmount);
     }
 
 }

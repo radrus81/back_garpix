@@ -15,7 +15,7 @@ class ProductsController extends Controller
         return view('index', compact('products'));
     }
     
-    public function actionSortProducts(Request $request){
+    public function sortProducts(Request $request){
        $products = Product::orderBy($request->field,$request->typeSort)->get();
        $trsTableHtml = view('trsTable',compact('products'))->render();
        return response()->json(array('trsTableHtml' => $trsTableHtml)); 

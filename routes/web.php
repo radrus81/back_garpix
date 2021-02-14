@@ -17,7 +17,6 @@ use App\Http\Controllers\CartSessionController;
 */
 
 Route::get('/', [ProductsController::class, 'actionGetProducts']);
-Route::get('/actionSortProducts', [ProductsController::class, 'actionSortProducts']);
 
 Route::get('/cartsession', [CartSessionController::class, 'index'])->name('cartsession');
 Route::post('/actionAddProductToSession', [CartSessionController::class, 'actionAddProduct']);

@@ -7,7 +7,7 @@ window.sortProducts = (field) => {
     }
     $.ajax({
         type: 'GET',
-        url: `http://${getUrl()}actionSortProducts?field=${field}&typeSort=${typeSort}`,
+        url: `http://${getUrl()}api/sortProducts?field=${field}&typeSort=${typeSort}`,
         dataType: 'json',
         beforeSend: function () {
             $(`.spinner${field}`).show();
